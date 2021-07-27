@@ -24,7 +24,7 @@ SPICY_BENCHMARK_DATA_DIR=${SPICY_BENCHMARK_DIR}/$(basename ${SPICY_BENCHMARK_DAT
 export PREFIX=${SPICY_BENCHMARK_DIR}/prefix
 export PATH=${ZEEK_PREFIX:-/data/zeek-4.0.1}/bin:$PATH
 export PATH=${PREFIX}/bin:$PATH
-export ZEEK_PLUGIN_PATH=$PREFIX/lib64/spicy
+export ZEEK_PLUGIN_PATH=$PREFIX/lib64/zeek-spicy
 # }}}
 
 # Get sources. {{{
@@ -91,7 +91,7 @@ echo "Building Spicy"
 (
 	cd "${SPICY_BENCHMARK_DIR}"/spicy
 	rm -rf build
-	./configure --enable-ccache --with-zeek="${ZEEK_PREFIX:-/data/zeek-4.0.1}" --build-type=Release --generator=Ninja --prefix="${PREFIX}"
+	./configure --enable-ccache --build-type=Release --generator=Ninja --prefix="${PREFIX}"
 	ninja -C build install
 )
 # }}}
