@@ -69,9 +69,14 @@ fi
 echo "Updating benchmark inputs"
 (
 	cd "${SPICY_BENCHMARK_DIR}"
+	old_mtime=$(stat --printf='%Y' ${SPICY_BENCHMARK_DATA} 2>/dev/null || true) # Can fail if no old file exists.
 	curl --silent --show-error -L --remote-name-all -z "${SPICY_BENCHMARK_DATA}" https://download.zeek.org/data/"${SPICY_BENCHMARK_DATA}"
-	rm -rf "${SPICY_BENCHMARK_DATA_DIR}"
-	tar xf "${SPICY_BENCHMARK_DATA}" -C "${SPICY_BENCHMARK_DIR}"
+	new_mtime=$(stat --printf='%Y' ${SPICY_BENCHMARK_DATA} 2>/dev/null)
+
+	if [ "x${old_mtime}" != "x${new_mtime}" ]; then
+		rm -rf "${SPICY_BENCHMARK_DATA_DIR}"
+		tar xf "${SPICY_BENCHMARK_DATA}" -C "${SPICY_BENCHMARK_DIR}"
+    fi
 )
 # }}}
 
