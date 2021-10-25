@@ -67,16 +67,16 @@ do_build() {
         echo Building ${p} binaries ...
 
         # Standalone binary
-        spicy-build -o ${p}-opt ../spicy-analyzers/analyzer/protocol/${p}/${p}.spicy &
-        spicy-build -o ${p}-dbg -d ../spicy-analyzers/analyzer/protocol/${p}/${p}.spicy &
+        spicy-build -o ${p}-opt ../spicy-analyzers/analyzer/${p}/${p}.spicy &
+        spicy-build -o ${p}-dbg -d ../spicy-analyzers/analyzer/${p}/${p}.spicy &
 
         # Standalone HLTO
-        spicyc -j -o ${p}-opt.hlto -O ../spicy-analyzers/analyzer/protocol/${p}/${p}.spicy &
-        spicyc -j -o ${p}-dbg.hlto -d ../spicy-analyzers/analyzer/protocol/${p}/${p}.spicy &
+        spicyc -j -o ${p}-opt.hlto -O ../spicy-analyzers/analyzer/${p}/${p}.spicy &
+        spicyc -j -o ${p}-dbg.hlto -d ../spicy-analyzers/analyzer/${p}/${p}.spicy &
 
         # Zeek HLTO
-        spicyz -o ${p}-zeek-opt.hlto -O ../spicy-analyzers/analyzer/protocol/${p}/${p}.spicy ../spicy-analyzers/analyzer/protocol/${p}/${p}.evt ../spicy-analyzers/analyzer/protocol/${p}/zeek_${p}.spicy &
-        spicyz -o ${p}-zeek-dbg.hlto -d ../spicy-analyzers/analyzer/protocol/${p}/${p}.spicy ../spicy-analyzers/analyzer/protocol/${p}/${p}.evt ../spicy-analyzers/analyzer/protocol/${p}/zeek_${p}.spicy &
+        spicyz -o ${p}-zeek-opt.hlto -O ../spicy-analyzers/analyzer/${p}/${p}.spicy ../spicy-analyzers/analyzer/${p}/${p}.evt ../spicy-analyzers/analyzer/${p}/zeek_${p}.spicy &
+        spicyz -o ${p}-zeek-dbg.hlto -d ../spicy-analyzers/analyzer/${p}/${p}.spicy ../spicy-analyzers/analyzer/${p}/${p}.evt ../spicy-analyzers/analyzer/${p}/zeek_${p}.spicy &
 
         wait
     done
