@@ -42,7 +42,7 @@ try:
 except FileExistsError:
     pass
 
-subprocess.check_call(["docker", "run", "-it", "--rm",
+subprocess.check_call(["docker", "run", "--rm",
                        "--privileged",
                        "-v", OUT+":/out", "-e", "OUT=/out",
                        "-v", os.getcwd() + "/spicy:/work",
@@ -67,7 +67,7 @@ fuzzers = {
 
 for grammar, parsers in fuzzers.items():
     for parser in parsers:
-        subprocess.check_call(["docker", "run", "-it", "--rm",
+        subprocess.check_call(["docker", "run", "--rm",
                                "-v", OUT + ":/work",
                                "-e", "SPICY_FUZZ_PARSER=" + parser,
                                "-e", "ASAN_OPTIONS=detect_leaks=0",
