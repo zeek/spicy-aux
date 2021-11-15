@@ -11,6 +11,7 @@ ARG ZEEK_VERSION=4.0.0-0
 CMD ["sh"]
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH="/opt/spicy/bin:/opt/zeek/bin:${PATH}"
+ENV ASAN_SYMBOLIZER=/usr/bin/llvm-symbolizer
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends curl ca-certificates gnupg2 less sudo \
@@ -37,7 +38,7 @@ RUN apt-get update \
  && echo 'deb http://apt.llvm.org/focal/ llvm-toolchain-focal-12 main' > /etc/apt/sources.list.d/llvm.list \
  && curl -o - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - \
  && apt update \
- && apt install -y --no-install-recommends clang-12 \
+ && apt install -y --no-install-recommends clang-12 llvm \
  # Spicy build and test dependencies.
  && apt-get install -y --no-install-recommends git cmake ninja-build ccache bison flex g++ libfl-dev zlib1g-dev jq locales-all make \
  && apt-get clean \
