@@ -72,7 +72,7 @@ for grammar, parsers in fuzzers.items():
                                "-e", "SPICY_FUZZ_PARSER=" + parser,
                                "-e", "ASAN_OPTIONS=detect_leaks=0",
                                IMAGE,
-                               *"/work/fuzz-{grammar} -timeout=120 -max_total_time={max_total_time} -jobs={nproc} -create_missing_dirs=1 -artifact_prefix=/work/corpus-fuzz-{grammar}-{parser}/artifacts/ /work/corpus-fuzz-{grammar}-{parser}".format(
+                               *"/work/fuzz-{grammar} -timeout={max_total_time} -max_total_time={max_total_time} -jobs={nproc} -create_missing_dirs=1 -artifact_prefix=/work/corpus-fuzz-{grammar}-{parser}/artifacts/ /work/corpus-fuzz-{grammar}-{parser}".format(
                                    grammar=grammar,
                                    parser=parser,
                                    max_total_time=MAX_TOTAL_TIME,
